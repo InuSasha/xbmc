@@ -29,6 +29,7 @@
 #include "utils/SortUtils.h"
 #include "video/VideoDbUrl.h"
 #include "VideoInfoTag.h"
+#include "xbmc/FileItem.h"
 
 class CFileItem;
 class CFileItemList;
@@ -670,6 +671,8 @@ public:
 
   void GetEpisodesByPlot(const std::string& strSearch, CFileItemList& items);
   void GetMoviesByPlot(const std::string& strSearch, CFileItemList& items);
+
+  bool GetNextEpisodeFromTvShow(const int idTvShow, CFileItemPtr& item);
 
   bool LinkMovieToTvshow(int idMovie, int idShow, bool bRemove);
   bool IsLinkedToTvshow(int idMovie);

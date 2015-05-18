@@ -143,6 +143,8 @@ const std::string CSettings::SETTING_VIDEOLIBRARY_BACKGROUNDUPDATE = "videolibra
 const std::string CSettings::SETTING_VIDEOLIBRARY_CLEANUP = "videolibrary.cleanup";
 const std::string CSettings::SETTING_VIDEOLIBRARY_EXPORT = "videolibrary.export";
 const std::string CSettings::SETTING_VIDEOLIBRARY_IMPORT = "videolibrary.import";
+const std::string CSettings::SETTING_VIDEOLIBRARY_SHOWSEENINHOME = "videolibrary.showseeninhome";
+const std::string CSettings::SETTING_VIDEOLIBRARY_TVSHOWSINHOME = "videolibrary.tvshowsinhome";
 const std::string CSettings::SETTING_VIDEOLIBRARY_SHOWEMPTYTVSHOWS = "videolibrary.showemptytvshows";
 const std::string CSettings::SETTING_LOCALE_AUDIOLANGUAGE = "locale.audiolanguage";
 const std::string CSettings::SETTING_VIDEOPLAYER_PREFERDEFAULTFLAG = "videoplayer.preferdefaultflag";
@@ -1024,6 +1026,8 @@ void CSettings::InitializeISettingCallbacks()
   settingSet.insert(CSettings::SETTING_VIDEOLIBRARY_CLEANUP);
   settingSet.insert(CSettings::SETTING_VIDEOLIBRARY_IMPORT);
   settingSet.insert(CSettings::SETTING_VIDEOLIBRARY_EXPORT);
+  settingSet.insert(CSettings::SETTING_VIDEOLIBRARY_SHOWSEENINHOME);
+  settingSet.insert(CSettings::SETTING_VIDEOLIBRARY_TVSHOWSINHOME);
   m_settingsManager->RegisterCallback(&CMediaSettings::GetInstance(), settingSet);
 
   settingSet.clear();

@@ -259,7 +259,7 @@
 					<top>220</top>
 					<height>20</height>
 					<width>480</width>
-					<label>20387</label>
+					<label>$INFO[Window.Property(LatestEpisode.Title)]</label>
 					<align>center</align>
 					<aligny>center</aligny>
 					<font>font12_title</font>
@@ -297,7 +297,7 @@
 							<top>10</top>
 							<width>220</width>
 							<height>155</height>
-							<aspectratio>scale</aspectratio>
+							<aspectratio>keep</aspectratio>
 							<texture background="true">$INFO[ListItem.Icon]</texture>
 							<bordertexture border="5">button-nofocus.png</bordertexture>
 							<bordersize>5</bordersize>
@@ -343,7 +343,7 @@
 							<top>10</top>
 							<width>220</width>
 							<height>155</height>
-							<aspectratio>scale</aspectratio>
+							<aspectratio>keep</aspectratio>
 							<texture background="true">$INFO[ListItem.Icon]</texture>
 							<bordertexture border="5">folder-focus.png</bordertexture>
 							<bordersize>5</bordersize>
@@ -354,7 +354,7 @@
 							<top>10</top>
 							<width>220</width>
 							<height>155</height>
-							<aspectratio>scale</aspectratio>
+							<aspectratio>keep</aspectratio>
 							<texture>$INFO[ListItem.Icon]</texture>
 							<bordertexture border="5">button-nofocus.png</bordertexture>
 							<bordersize>5</bordersize>

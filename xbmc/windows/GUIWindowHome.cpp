@@ -26,6 +26,7 @@
 #include "interfaces/AnnouncementManager.h"
 #include "utils/log.h"
 #include "settings/AdvancedSettings.h"
+#include "settings/Settings.h"
 #include "utils/Variant.h"
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"
@@ -102,6 +103,14 @@ void CGUIWindowHome::Announce(AnnouncementFlag flag, const char *sender, const c
       ra_flag |= Video;
     else if (flag & AudioLibrary)
       ra_flag |= Audio;
+  }
+
+  // OnUpdate from VideoLibrary and with home filter active, we have to update the video list
+  if (onUpdate && (flag & VideoLibrary) && (
+      !CSettings::GetInstance().GetBool(CSettings::SETTING_VIDEOLIBRARY_SHOWSEENINHOME) ||
+      CSettings::GetInstance().GetInt(CSettings::SETTING_VIDEOLIBRARY_TVSHOWSINHOME) != SETTINGS_VIDEODB_TVSHOW_HOME_EPISODES) )
+  {
+    ra_flag |= Video;
   }
 
   CGUIMessage reload(GUI_MSG_NOTIFY_ALL, GetID(), 0, GUI_MSG_REFRESH_THUMBS, ra_flag);

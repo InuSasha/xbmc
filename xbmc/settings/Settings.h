@@ -30,6 +30,11 @@
 #include "settings/lib/ISettingCallback.h"
 #include "threads/CriticalSection.h"
 
+#define SETTINGS_VIDEODB_TVSHOW_HOME_EPISODES                  0
+#define SETTINGS_VIDEODB_TVSHOW_HOME_RECENTLY_ADDED            1
+#define SETTINGS_VIDEODB_TVSHOW_HOME_INPROGRESS                2
+#define SETTINGS_VIDEODB_TVSHOW_HOME_INPROGRESS_RECENTLY_ADDED 4
+
 class CSetting;
 class CSettingList;
 class CSettingSection;
@@ -99,6 +104,8 @@ public:
   static const std::string SETTING_VIDEOLIBRARY_CLEANUP;
   static const std::string SETTING_VIDEOLIBRARY_EXPORT;
   static const std::string SETTING_VIDEOLIBRARY_IMPORT;
+  static const std::string SETTING_VIDEOLIBRARY_SHOWSEENINHOME;
+  static const std::string SETTING_VIDEOLIBRARY_TVSHOWSINHOME;
   static const std::string SETTING_VIDEOLIBRARY_SHOWEMPTYTVSHOWS;
   static const std::string SETTING_LOCALE_AUDIOLANGUAGE;
   static const std::string SETTING_VIDEOPLAYER_PREFERDEFAULTFLAG;
