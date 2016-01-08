@@ -356,10 +356,6 @@ void CVideoPlayerVideo::Process()
     }
     else if (pMsg->IsType(CDVDMsg::VIDEO_NOSKIP))
     {
-      // libmpeg2 is also returning incomplete frames after a dvd cell change
-      // so the first few pictures are not the correct ones to display in some cases
-      // just display those together with the correct one.
-      // (setting it to 2 will skip some menu stills, 5 is working ok for me).
       m_iNrOfPicturesNotToSkip = 5;
     }
     else if (pMsg->IsType(CDVDMsg::PLAYER_SETSPEED))
@@ -449,6 +445,8 @@ void CVideoPlayerVideo::Process()
         codecControl |= DVD_CODEC_CTRL_NO_POSTPROC;
       if (bPacketDrop)
         codecControl |= DVD_CODEC_CTRL_DROP;
+      if (!m_renderManager.Supports(RENDERFEATURE_ROTATION))
+        codecControl |= DVD_CODEC_CTRL_ROTATE;
       m_pVideoCodec->SetCodecControl(codecControl);
       if (iDropDirective & EOS_DROPPED)
       {
@@ -473,28 +471,6 @@ void CVideoPlayerVideo::Process()
       // both frames will be dropped in that case instead of just the first
       // decoder still needs to provide an empty image structure, with correct flags
       m_pVideoCodec->SetDropState(bRequestDrop);
-
-      // ask codec to do deinterlacing if possible
-      EDEINTERLACEMODE mDeintMode = CMediaSettings::GetInstance().GetCurrentVideoSettings().m_DeinterlaceMode;
-      EINTERLACEMETHOD mInt = m_renderManager.AutoInterlaceMethod(CMediaSettings::GetInstance().GetCurrentVideoSettings().m_InterlaceMethod);
-
-      unsigned int mFilters = 0;
-
-      if (mDeintMode != VS_DEINTERLACEMODE_OFF)
-      {
-        if (mInt == VS_INTERLACEMETHOD_DEINTERLACE)
-          mFilters = CDVDVideoCodec::FILTER_DEINTERLACE_ANY;
-        else if(mInt == VS_INTERLACEMETHOD_DEINTERLACE_HALF)
-          mFilters = CDVDVideoCodec::FILTER_DEINTERLACE_ANY | CDVDVideoCodec::FILTER_DEINTERLACE_HALFED;
-
-        if (mDeintMode == VS_DEINTERLACEMODE_AUTO && mFilters)
-          mFilters |=  CDVDVideoCodec::FILTER_DEINTERLACE_FLAGGED;
-      }
-
-      if (!m_renderManager.Supports(RENDERFEATURE_ROTATION))
-        mFilters |= CDVDVideoCodec::FILTER_ROTATE;
-
-      mFilters = m_pVideoCodec->SetFilters(mFilters);
 
       int iDecoderState = m_pVideoCodec->Decode(pPacket->pData, pPacket->iSize, pPacket->dts, pPacket->pts);
 
@@ -615,22 +591,6 @@ bool CVideoPlayerVideo::ProcessDecoderOutput(int &decoderState, double &frametim
       /* use forced aspect if any */
       if( m_fForcedAspectRatio != 0.0f )
         m_picture.iDisplayWidth = (int) (m_picture.iDisplayHeight * m_fForcedAspectRatio);
-
-      //Deinterlace if codec said format was interlaced or if we have selected we want to deinterlace
-      //this video
-      // ask codec to do deinterlacing if possible
-      EDEINTERLACEMODE mDeintMode = CMediaSettings::GetInstance().GetCurrentVideoSettings().m_DeinterlaceMode;
-      EINTERLACEMETHOD mInt = m_renderManager.AutoInterlaceMethod(CMediaSettings::GetInstance().GetCurrentVideoSettings().m_InterlaceMethod);
-      if ((mDeintMode == VS_DEINTERLACEMODE_AUTO && (m_picture.iFlags & DVP_FLAG_INTERLACED)) || mDeintMode == VS_DEINTERLACEMODE_FORCE)
-      {
-        if (mInt == VS_INTERLACEMETHOD_SW_BLEND)
-        {
-          if (!sPostProcessType.empty())
-            sPostProcessType += ",";
-          sPostProcessType += g_advancedSettings.m_videoPPFFmpegDeint;
-          bPostProcessDeint = true;
-        }
-      }
 
       if (CMediaSettings::GetInstance().GetCurrentVideoSettings().m_PostProcess)
       {
