@@ -37,6 +37,8 @@ Node OverviewChildren[] = {
                             { NODE_TYPE_RECENTLY_ADDED_EPISODES,    "recentlyaddedepisodes",    20387 },
                             { NODE_TYPE_RECENTLY_ADDED_MUSICVIDEOS, "recentlyaddedmusicvideos", 20390 },
                             { NODE_TYPE_INPROGRESS_TVSHOWS,         "inprogresstvshows",        626 },
+                            { NODE_TYPE_HOME_MOVIES,                "homemovies",               18 },
+                            { NODE_TYPE_HOME_TVSHOWS,               "hometvshows",              19 },
                           };
 
 CDirectoryNodeOverview::CDirectoryNodeOverview(const std::string& strName, CDirectoryNode* pParent)
@@ -94,10 +96,12 @@ bool CDirectoryNodeOverview::GetContent(CFileItemList& items) const
   {
     if (hasMovies)
       vec.push_back(std::make_pair("recentlyaddedmovies", 20386));  // Recently Added Movies
+      vec.push_back(std::make_pair("homemovies", 18));
     if (hasTvShows)
     {
       vec.push_back(std::make_pair("recentlyaddedepisodes", 20387)); // Recently Added Episodes
       vec.push_back(std::make_pair("inprogresstvshows", 626)); // InProgress TvShows
+      vec.push_back(std::make_pair("hometvshows", 19));
     }
     if (hasMusicVideos)
       vec.push_back(std::make_pair("recentlyaddedmusicvideos", 20390)); // Recently Added Music Videos

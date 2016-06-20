@@ -126,7 +126,16 @@ msgctxt "#17"
 msgid "Sunday"
 msgstr ""
 
-#empty strings from id 18 to 20
+#. Home PlayLists
+msgctxt "#18"
+msgid "Home Movie Liste"
+msgstr ""
+
+msgctxt "#19"
+msgid "Home Serien Liste"
+msgstr ""
+
+#empty strings id 20
 
 msgctxt "#21"
 msgid "January"

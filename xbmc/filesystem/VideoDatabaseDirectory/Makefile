@@ -14,6 +14,8 @@ SRCS=DirectoryNode.cpp \
      DirectoryNodeTitleMusicVideos.cpp \
      DirectoryNodeTitleTvShows.cpp \
      DirectoryNodeTvShowsOverview.cpp \
+     DirectoryNodeHomeMovies.cpp \
+     DirectoryNodeHomeTvShows.cpp \
      QueryParams.cpp \
 
 LIB=videodatabasedirectory.a

@@ -142,6 +142,8 @@ CGUIViewStateWindowVideoNav::CGUIViewStateWindowVideoNav(const CFileItemList& it
         SetSortOrder(viewState->m_sortDescription.sortOrder);
       }
       break;
+    case NODE_TYPE_HOME_MOVIES:
+    case NODE_TYPE_HOME_TVSHOWS:
     case NODE_TYPE_MUSICVIDEOS_ALBUM:
     case NODE_TYPE_GENRE:
     case NODE_TYPE_COUNTRY:

@@ -36,6 +36,8 @@
 #include "DirectoryNodeMusicVideosOverview.h"
 #include "DirectoryNodeRecentlyAddedMusicVideos.h"
 #include "DirectoryNodeTitleMusicVideos.h"
+#include "DirectoryNodeHomeMovies.h"
+#include "DirectoryNodeHomeTvShows.h"
 #include "URL.h"
 #include "FileItem.h"
 #include "utils/StringUtils.h"
@@ -140,6 +142,10 @@ CDirectoryNode* CDirectoryNode::CreateNode(NODE_TYPE Type, const std::string& st
     return new CDirectoryNodeInProgressTvShows(strName,pParent);
   case NODE_TYPE_TITLE_MUSICVIDEOS:
     return new CDirectoryNodeTitleMusicVideos(strName,pParent);
+  case NODE_TYPE_HOME_MOVIES:
+    return new CDirectoryNodeHomeMovies(strName,pParent);
+  case NODE_TYPE_HOME_TVSHOWS:
+    return new CDirectoryNodeHomeTvShows(strName,pParent);
   default:
     break;
   }

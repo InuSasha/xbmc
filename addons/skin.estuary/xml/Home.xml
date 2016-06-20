@@ -63,9 +63,11 @@
 							<param name="list_id" value="5100"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies)">
-							<param name="content_path" value="special://skin/playlists/recent_unwatched_movies.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[20386]"/>
+							<param name="content_path" value="videodb://homemovies/"/>
+							<param name="widget_header" value="$LOCALIZE[20386]/$LOCALIZE[20434]"/>
 							<param name="widget_target" value="videos"/>
+							<param name="sortby" value="dateadded"/>
+							<param name="sortorder" value="descending"/>
 							<param name="list_id" value="5200"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies)">
@@ -117,17 +119,18 @@
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6900"/>
 						</include>
-						<include content="WidgetListPoster" condition="Library.HasContent(tvshows)">
-							<param name="content_path" value="videodb://inprogresstvshows"/>
-							<param name="sortby" value="lastplayed"/>
-							<param name="sortorder" value="descending"/>
+						<include content="WidgetListEpisodes" condition="Library.HasContent(tvshows)">
+							<param name="content_path" value="videodb://hometvshows"/>
+							<param name="sortby" value="name"/>
 							<param name="widget_header" value="$LOCALIZE[626]"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6100"/>
 						</include>
-						<include content="WidgetListEpisodes" condition="Library.HasContent(tvshows)">
-							<param name="content_path" value="special://skin/playlists/recent_unwatched_episodes.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[20387]"/>
+						<include content="WidgetListPoster" condition="Library.HasContent(tvshows)">
+							<param name="content_path" value="special://skin/playlists/recent_unwatched_tvshows.xsp"/>
+							<param name="sortby" value="dateadded"/>
+							<param name="sortorder" value="descending"/>
+							<param name="widget_header" value="$LOCALIZE[20387]/$LOCALIZE[20343]"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6200"/>
 						</include>

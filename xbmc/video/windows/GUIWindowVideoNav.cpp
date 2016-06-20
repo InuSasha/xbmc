@@ -374,7 +374,8 @@ bool CGUIWindowVideoNav::GetDirectory(const std::string &strDirectory, CFileItem
 
       if (node == VIDEODATABASEDIRECTORY::NODE_TYPE_EPISODES ||
           node == NODE_TYPE_SEASONS                          ||
-          node == NODE_TYPE_RECENTLY_ADDED_EPISODES)
+          node == NODE_TYPE_RECENTLY_ADDED_EPISODES          ||
+          node == NODE_TYPE_HOME_TVSHOWS)
       {
         CLog::Log(LOGDEBUG, "WindowVideoNav::GetDirectory");
         // grab the show thumb
@@ -435,7 +436,8 @@ bool CGUIWindowVideoNav::GetDirectory(const std::string &strDirectory, CFileItem
           items.SetContent("seasons");
       }
       else if (node == NODE_TYPE_TITLE_MOVIES ||
-               node == NODE_TYPE_RECENTLY_ADDED_MOVIES)
+               node == NODE_TYPE_RECENTLY_ADDED_MOVIES ||
+               node == NODE_TYPE_HOME_MOVIES)
       {
         if (params.GetSetId() > 0)
         {
@@ -1208,6 +1210,10 @@ std::string CGUIWindowVideoNav::GetStartFolder(const std::string &dir)
     return "videodb://inprogresstvshows/";
   else if (lower == "files")
     return "sources://video/";
+  else if (lower == "homemovies")
+    return "videodb://homemovies/";
+  else if (lower == "hometvshows")
+    return "videodb://hometvshows/";
   return CGUIWindowVideoBase::GetStartFolder(dir);
 }
 
